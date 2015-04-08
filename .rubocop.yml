@@ -1,0 +1,24 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'db/**'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/spec_helper.rb'
+    - 'bin/delayed_job'
+
+Style/CyclomaticComplexity:
+  Enabled: false
+
+Style/MethodLength:
+  CountComments: false
+  Max: 100
+
+Style/ParameterLists:
+  Max: 7
+
+Documentation:
+  Enabled: false
+
+ParenthesesAsGroupedExpression:
+  Enabled: false

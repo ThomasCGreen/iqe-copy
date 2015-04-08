@@ -1,0 +1,129 @@
+<% case @qtest.question_finished %>
+<% when -1 %>
+  <h1><b>Welcome to the Innovation Quotient Edge Assessment!</b></h1>
+  <p>
+    Hello and welcome to the Innovation Quotient Edge Assessment. It takes
+    approximately 5 – 7 minutes to answer the assessment questions. Each question
+    is on a scale from ‘Strongly Disagree’ to ‘Strongly Agree’. Answer based
+    on how you perceive yourself, your actions and your feelings in various
+    situations. Do not worry about how you think others might answer these
+    questions. This is about your natural strengths and driving innovative
+    forces.
+  </p><p></p><p>
+  Ready…set…go!
+</p><p></p><p>
+
+  <%= render 'id_page' %>
+
+<% when 0..@qtest.question_count - 1 %>
+
+  <h2><b>
+    Innovation Quotient Edge
+  </b></h2>
+  <p></p>
+  <%= render 'pages' %>
+
+<% when @qtest.question_count %>
+
+  <h2>You have completed the Innovation Quotient Edge (IQE) assessment!</h2>
+  <p></p><p>
+  As we tabulate your results and throw some pixie dust on them for
+  good luck, we hope you can take a few minutes to help us in our
+  efforts to continually improve and provide a high-quality,
+  high-value offering.
+</p><p></p><p>
+  Please take a few seconds to fill out the information below before
+  you click ‘CALCULATE MY IQE’.
+</p><p></p><p>
+   <b>Note: Your results will not be tabulated until you click
+  ‘CALCULATE MY IQE’ below.</b>
+</p><p></p><p>
+
+  <%= render 'post_question_page' %>
+
+<% else %>
+
+  <h2>Thank you for taking the Innovation Quotient Edge (IQE) assessment.</h2>
+
+  <% if @qtest.send_to_client %>
+
+    <p></p><p>
+
+  Woot woot…your results are being calculated as you read this note.
+  Check your email for your unique results.
+</p><p></p><p>
+  You are about to discover more about YOU, and how you can better:
+</p><p></p>
+    <ul>
+      <li>
+        Perform at your peak
+      </li>
+      <li>
+        Bring more innovative ideas to the table
+      </li>
+      <li>
+        Be a high value team member
+      </li>
+      <li>
+        Create game-changing results
+    </ul>
+    <p></p><p>
+  Your Innovation Quotient Edge results have been emailed to
+</p><p></p><p>
+  <%= "#{@qtest.first_name} #{@qtest.last_name} <#{@qtest.email}>" %>
+</p><p></p><p>
+  <% if @qtest.free_test %>
+    </p><p></p><p>
+  I hope you get great awareness and value out of taking the IQE.
+</p><p></p><p>
+  Once you’ve had a chance to review your results, give us a call
+  at 303.339.0135 to discuss your results and how the IQE might
+  help your teams achieve new levels of success.
+  <% end %>
+  </p><p></p><p>
+  If you would like to have the assessment re-emailed to that address, click
+  on the ‘Re-email’ button below.
+</p><p></p><p>
+  <%= form_for @qtest, url: qtest_path, :html => {:class => 'form-horizontal'} do |f| %>
+    <div class="form-actions">
+      <%= f.submit 'Re-email', :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+  </p><p></p><p>
+  Know someone or a group that would find value in discovering and
+  understanding their Innovation Quotient Edge? Send them the link below
+  and they, too, can gain the edge.
+</p><p></p><p>
+  <a href="http://InnovationQuotientTest.com">http://InnovationQuotientTest.com</a>
+</p><p></p><p>
+
+  <% else %>
+
+    <p></p><p>
+  Congratulations <%= @qtest.first_name %>
+</p><p></p><p>
+  Your results are being calculated and sent over to your coach as you
+  read this page. Please connect with your coach to get your full report
+  and a debrief of the results.
+</p><p></p><p>
+  You are about to discover more about YOU, and how you can better:
+</p><p></p>
+    <ul>
+      <li>
+        Perform at your peak
+      </li>
+      <li>
+        Bring more innovative ideas to the table
+      </li>
+      <li>
+        Be a high value team member
+      </li>
+      <li>
+        Create game-changing results
+      </li>
+    </ul>
+    </p><p></p><p>
+
+  <% end %>
+
+<% end %>

@@ -1,0 +1,56 @@
+
+<%= form_for @qtest, url: qtest_path, :html => {:class => 'form-horizontal'} do |f| %>
+  <% if @qtest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@qtest.errors.count, 'error') %>
+        prohibited this form from being saved:</h2>
+      <ul>
+        <% @qtest.errors.full_messages.each do |msg| %>
+          <li class='alert fade in alert-danger alert-dismissable'><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table table-striped table-responsive">
+    <thead>
+    <tr>
+      <th>Question</th>
+      <th>Strongly Disagree</th>
+      <th>Disagree</th>
+      <th>Slightly Disagree</th>
+      <th>Slightly Agree</th>
+      <th>Agree</th>
+      <th>Strongly Agree</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @qa = QuestionAnswer.where(qtest_id: @qtest.id,
+                                  question_seq: @qtest.question_start..
+                                    @qtest.question_end) %>
+    <%= f.fields_for :question_answers, @qa do |qa| %>
+      <tr id='<%= "#{qa.index + @qtest.question_start}" %>'>
+        <div class="btn-group" data-toggle="buttons-radio">
+          <td><div class="left"><%= "#{qa.index + @qtest.question_start}. " %>
+            <%= @qtest.question_text(qa.index + @qtest.question_start) %></td>
+          <td><%= qa.radio_button :answer, '1' %></td>
+          <td><%= qa.radio_button :answer, '2' %></td>
+          <td><%= qa.radio_button :answer, '3' %></td>
+          <td><%= qa.radio_button :answer, '4' %></td>
+          <td><%= qa.radio_button :answer, '5' %></td>
+          <td><%= qa.radio_button :answer, '6' %></td>
+        </div>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <div class="form-actions">
+    <%= f.submit '<-- Go Back ', :class => 'btn btn-primary' %>
+    <%= f.submit ' Continue -->', :class => 'btn btn-primary' %>
+  </div>
+
+  <% done = @qtest.question_finished * 100 / @qtest.question_count %>
+  <%=  progress_bar(done, color: 'blue') %>
+<% end %>

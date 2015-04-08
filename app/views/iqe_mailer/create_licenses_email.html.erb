@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html'; charset=UTF-8' http-equiv='Content-Type' ?>
+</head>
+<body>
+<h1>Innovation Quotient Edge License Keys</h1>
+<p>
+  <% if @multiuse_license %>
+    We emailed a multi-use license with <%= @license_quantity %> uses to:
+  <% else %>
+    We emailed <%= @license_quantity %> licenses to
+  <% end %>
+  <%= "#{@coach_first_name} #{@coach_last_name} <#{@coach_email}>" %>:
+</p>
+<p>Note: <%= @send_to_client ? "ALL" : "NONE" %> of the results will
+  be sent to clients as they complete their
+  assessment.</p>
+<p></p>
+<p></p>
+<% @licenses.each do |license|  %>
+  <p><%= license %></p>
+<% end %>
+<p></p><p>
+  Tamara G. Kleinberg 
+</p><p>
+  Founder & Serial Innovator 
+</p><p></p><p>
+  303.339.0135   |   tamara@theshuuk.com   |   theshuuk.com
+</p><p></p><p>
+  <%= image_tag 'Shuuk Logo for email.jpg' %>
+</body>
+</html>
+

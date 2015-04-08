@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html'
+  ; charset=UTF-8' http-equiv='Content-Type' ?>
+</head>
+<body>
+<% if @multiuse_license %>
+  <h1>
+    Your Innovation Quotient Edge Multi-license Unique Link
+  </h1>
+  <p>
+    Dear <%= @coach_first_name %>,
+  </p><p></p><p>
+  Here is your unique multi-license with <%= @license_quantity %> uses:
+</p>
+  <p>
+    <%= "http://InnovationQuotientTest.com/taketest/#{@licenses[0]}" %>
+  </p><p></p><p>
+  Please note that the above link is valid for <%= @license_quantity %>
+  uses for your clients. Please use the Coaches License Tracking sheet in
+  the IQE member’s site to keep track of your IQE link usages.
+</p><p></p><p>
+  You have requested that your client’s results be sent directly to
+  <%= @send_to_client ? "you and your" : "you and not to your" %>
+  clients. <%= @send_to_client ? "All" : "None" %> of the IQE results
+  associated with this link will be sent directly to your clients.
+  <% unless @send_to_client %>
+    Therefore, for your clients to see the results you must send those results to them.
+  <% end %>
+<% else %>
+  <h1>Innovation Quotient Edge License Keys</h1>
+  <p>
+    Dear <%= @coach_first_name %>,
+  </p><p></p><p>
+  You have requested that your client’s results be sent directly to
+  <%= @send_to_client ? "you and your" : "you and not to your" %>
+  clients. <%= @send_to_client ? "All" : "None" %> of the IQE results
+  associated with these links will be sent directly to your clients.
+  <% unless @send_to_client %>
+    Therefore, for your clients to see the results you must send the results to them.
+  <% end %>
+</p><p></p><p>
+  Here are your <%= @license_quantity %> licenses:
+</p><p>
+  <% @licenses.each do |license| %>
+    </p><p>
+  <%= "#{license}" %>
+</p>
+  <% end %>
+  <p></p><p>
+  Here are the same licenses as a link:
+</p><p></p><p>
+  <% @licenses.each do |license| %></p>
+    <p>
+      <%= "http://InnovationQuotientTest.com/taketest/#{license}" %>
+    </p>
+  <% end %>
+<% end %>
+<p></p><p>
+  Tamara G. Kleinberg 
+</p><p>
+  Founder & Serial Innovator 
+</p><p></p><p>
+  303.339.0135   |   tamara@theshuuk.com   |   theshuuk.com
+</p><p></p><p>
+  <%= image_tag 'Shuuk Logo for email.jpg' %>
+</body>
+</html>
+

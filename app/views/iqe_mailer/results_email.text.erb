@@ -1,0 +1,51 @@
+Innovation Quotient Edge (IQE) Results
+
+Hello <%= @qtest.coach_first_name %>,
+
+  Your client has taken the Innovation Quotient Edge (IQE) Assessment. The results
+  for <%= "#{@qtest.first_name} #{@qtest.last_name}" %> are attached.
+
+  <% if @qtest.send_to_client %>
+
+    These results were also sent to:
+
+  <%= "#{@qtest.first_name} #{@qtest.last_name}: #{@qtest.email}" %>
+
+  <% else %>
+
+    Per your request, these results were not sent to your client.
+    Please forward or show results to your client when you are ready.
+
+  <% end %>
+
+  Thank you,
+
+  Tamara
+
+  PS – Please feel free to reference the presentation and other IQE
+  materials in your coaches toolbox to help guide your client through
+  their results.
+
+  Tamara G. Kleinberg 
+
+  Founder & Serial Innovator 
+
+  303.339.0135   |   tamara@theshuuk.com   |   theshuuk.com
+
+
+  Field           Value
+
+  First name:     <%= @qtest.first_name %>
+  Last name:      <%= @qtest.last_name %>
+  Email:          <%= @qtest.email %><
+
+    <% if Rails.env.test? %>
+      <% @trigger_weights.each_pair do |trigger, score| %>
+        <%= "#{trigger}:" %>      <%= score %>
+      <% end %>
+    <% end %>
+
+   Innovation Style:          <%= @qtest.innovation_style %>
+   Primary Power Trigger:     <%= @qtest.driving_strength_1 %>
+   Secondary Power Trigger:   <%= @qtest.driving_strength_2 %>
+   Dormant Trigger:           <%= @qtest.latent_strength %>

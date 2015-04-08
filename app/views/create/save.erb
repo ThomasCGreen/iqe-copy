@@ -1,0 +1,22 @@
+<% if @multiuse_license %>
+  <h1>Here is your multi-use license with <%= @license_quantity %> uses:</h1>
+  <h3>
+    An email of this license has been sent to
+<% else %>
+  <h1>Here are your <%= @license_quantity %> licenses:</h1>
+  <h3>
+    An email of these licenses has been sent to
+<% end %>
+  <%= "#{@coach_first_name} #{@coach_last_name} <#{@coach_email}>" %>:
+</h3>
+
+<p>
+
+</p>
+<p></p>
+<p></p>
+<div>
+<% @licenses.each { |license| %>
+  <p><%= license %></p>
+<% } %>
+</div>

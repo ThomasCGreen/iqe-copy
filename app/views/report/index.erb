@@ -1,0 +1,163 @@
+
+<h1>
+  The current time is: <%= Time.new.localtime %>
+</h1>
+<% if @infusionsoft.count > 0 %>
+  <h2><b>
+    The following assessment tags were sent to Infusionsoft:
+  </b></h2><p></p>
+  <table class="table table-striped table-responsive">
+    <thead>
+    <tr>
+      <th></th>
+      <th colspan="3">Client/Coach</th>
+      <th colspan="4">Infusionsoft/Values</th>
+    </tr>
+    <tr>
+      <th>Promo</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Style</th>
+      <th>Primary</th>
+      <th>Secondary</th>
+      <th>Dormant</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @infusionsoft.each do |test| %>
+      <tr>
+        <td>
+          <%= test[:qtest].free_test ? 'Yes' : '' %>
+        </td>
+        <td>
+          <%= test[:qtest].first_name %>
+        </td>
+        <td>
+          <%= test[:qtest].last_name %>
+        </td>
+        <td>
+          <%= test[:qtest].email %>
+        </td>
+        <td>
+          <%= test[:qtest].innovation_style %>
+        </td>
+        <td>
+          <%= test[:qtest].driving_strength_1 %>
+        </td>
+        <td>
+          <%= test[:qtest].driving_strength_2 %>
+        </td>
+        <td>
+          <%= test[:qtest].latent_strength %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+        <td>
+          <%= test[:qtest].coach_first_name %>
+        </td>
+        <td>
+          <%= test[:qtest].coach_last_name %>
+        </td>
+        <td>
+          <%= test[:qtest].coach_email %>
+        </td>
+        <td>
+          <%= test[:style] %>
+        </td>
+        <td>
+          <%= test[:primary_strength] %>
+        </td>
+        <td>
+          <%= test[:secondary_strength] %>
+        </td>
+        <td>
+          <%= test[:latent_strength] %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h2>
+    There were no new assessments sent to Infusionsoft.
+  </h2><p></p>
+<% end %>
+
+<% @report.each_pair do |key, report| %>
+  <h2><b>
+    <%= "#{key}:" %>
+  </b></h2>
+  <p></p>
+  <table class='table table-striped table-responsive'>
+    <thead>
+    <tr>
+      <th>Type</th>
+      <th>Total</th>
+      <th>Finished</th>
+      <th>In-process</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Promo</td>
+      <td><%= report[:count][:promo] %></td>
+      <td><%= report[:finished][:promo] %></td>
+      <td><%= report[:in_process][:promo] %></td>
+    </tr>
+    <tr>
+      <td>Regular</td>
+      <td><%= report[:count][:regular] %></td>
+      <td><%= report[:finished][:regular] %></td>
+      <td><%= report[:in_process][:regular] %></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p></p>
+
+  <% if (report[:in_process][:promo] + report[:in_process][:regular]) > 0 %>
+    <h3><b>These are the assessments that are not finished:</b></h3>
+    <p></p>
+    <table class='table table-striped table-responsive'>
+      <thead>
+      <tr>
+        <th>Type</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Question Finished</th>
+        <th>Total Questions</th>
+        <th>Company</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% report[:not_finished][:promo].each do |qtest| %>
+        <tr>
+          <td>Promo</td>
+          <td><%= qtest.first_name %></td>
+          <td><%= qtest.last_name %></td>
+          <td><%= qtest.email %></td>
+          <td><%= qtest.question_finished %></td>
+          <td><%= qtest.question_count %></td>
+          <td><%= qtest.company %></td>
+        </tr>
+      <% end %>
+
+      <% report[:not_finished][:regular].each do |qtest| %>
+        <tr>
+          <td>Regular</td>
+          <td><%= qtest.first_name %></td>
+          <td><%= qtest.last_name %></td>
+          <td><%= qtest.email %></td>
+          <td><%= qtest.question_finished %></td>
+          <td><%= qtest.question_count %></td>
+          <td><%= qtest.company %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

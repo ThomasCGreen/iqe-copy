@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html'; charset=UTF-8' http-equiv='Content-Type' ?>
+</head>
+<body>
+<h1>Innovation Quotient Edge (IQE) Results</h1>
+
+<p></p><p>
+  Hello <%= @qtest.coach_first_name %>,
+</p><p></p><p>
+  Your client has taken the Innovation Quotient Edge (IQE) Assessment.
+  The results for
+  <%= "#{@qtest.first_name} #{@qtest.last_name}" %> are attached.
+</p><p></p><p>
+
+  <% if @qtest.send_to_client %>
+
+    These results were also sent to:
+    </p><p></p><p>
+  <%= "#{@qtest.first_name} #{@qtest.last_name}: #{@qtest.email}" %>
+
+  <% else %>
+
+    Per your request, these results were not sent to your client.
+    Please forward or show the results to your client when you are ready.
+
+  <% end %>
+  </p><p></p><p>
+  Thank you,
+</p><p></p><p>
+  Tamara
+</p><p></p><p>
+  P.S. – Please feel free to reference the presentation and other IQE
+  materials in your coaches toolbox to help guide your client through
+  their results.
+</p><p></p><p>
+  Tamara G. Kleinberg 
+</p><p>
+  Founder & Serial Innovator 
+</p><p></p><p>
+  303.339.0135   |   tamara@theshuuk.com   |   theshuuk.com
+</p><p></p><p>
+  <%= image_tag 'Shuuk Logo for email.jpg' %>
+</p><p></p><p></p>
+  <table class="table table-striped table-responsive">
+    <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Value</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr id="First Name">
+      <td class="right">First name:</td>
+      <td class="left"><%= @qtest.first_name %></td>
+    </tr>
+    <tr id="Last Name">
+      <td class="right">Last name:</td>
+      <td class="left"><%= @qtest.last_name %></td>
+    </tr>
+    <tr id="Email">
+      <td class="right">Email:</td>
+      <td class="left"><%= @qtest.email %></td>
+    </tr>
+
+    <% if Rails.env.test? %>
+      <% @trigger_weights.each_pair do |trigger, score| %>
+        <tr id="<%= trigger %>">
+          <td class="right"><%= "#{trigger}:" %></td>
+          <td class="left"><%= score %></td>
+        </tr>
+      <% end %>
+    <% end %>
+
+    <tr id="Style">
+      <td class="right">Innovation Style:</td>
+      <td class="left"><%= @qtest.innovation_style %></td>
+    </tr>
+    <tr id="Driving Strength">
+      <td class="right">Primary Power Trigger:</td>
+      <td class="left"><%= @qtest.driving_strength_1 %></td>
+    </tr>
+    <tr id="Secondary Strength">
+      <td class="right">Secondary Power Trigger:</td>
+      <td class="left"><%= @qtest.driving_strength_2 %></td>
+    </tr>
+    <tr id="Latent Strength">
+      <td class="right">Dormant Trigger:</td>
+      <td class="left"><%= @qtest.latent_strength %></td>
+    </tr>
+    </tbody>
+  </table>
+
+  </body>
+</html>
